@@ -255,3 +255,43 @@ def test_multiple_users_same_ip(tmp_path):
     assert "SUSPICIOUS IP ACTIVITY" in report
     assert "IP 192.168.1.15 targeted multiple users" in report
     assert "admin, rahul" in report
+
+def test_json_report_generation(tmp_path):
+    log_file = tmp_path / "test.log"
+    output_file = tmp_path / "report.txt"
+    json_file = tmp_path / "report.json"
+
+    log_file.write_text(
+        "2026-08-06 10:15:00 ERROR "
+        "Service authentication failed\n"
+    )
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(DETECTOR),
+            "--log",
+            str(log_file),
+            "--output",
+            str(output_file),
+            "--json-output",
+            str(json_file)
+        ],
+        capture_output=True,
+        text=True
+    )
+
+    assert result.returncode == 0
+    assert json_file.exists()
+
+    import json
+
+    data = json.loads(json_file.read_text())
+
+    assert "summary" in data
+    assert "alerts" in data
+    assert "rapid_login_detection" in data
+    assert "login_burst_detection" in data
+
+    assert data["summary"]["total_errors"] == 1
+    assert data["summary"]["authentication_failures"] == 1
