@@ -1,0 +1,17 @@
+2026-08-06 10:15:23 INFO User 'mayank' logged in from 192.168.1.10
+2026-08-06 10:15:45 INFO User viewed dashboard
+2026-08-06 10:16:02 WARNING CPU usage reached 85%
+2026-08-06 10:16:15 ERROR Database connection failed
+2026-08-06 10:16:40 INFO User uploaded report.pdf
+2026-08-06 10:17:05 ERROR Invalid password for user 'admin' from 192.168.1.15
+2026-08-06 10:17:25 WARNING Disk usage reached 90%
+2026-08-06 10:18:10 INFO User 'rahul' logged in from 192.168.1.20
+2026-08-06 10:18:30 ERROR Failed login attempt for user 'admin' from 192.168.1.15
+2026-08-06 10:18:40 ERROR Failed login attempt for user 'admin' from 192.168.1.15
+2026-08-06 10:18:50 ERROR Failed login attempt for user 'admin' from 192.168.1.15
+2026-08-06 10:19:00 ERROR Failed login attempt for user 'admin' from 192.168.1.15
+2026-08-06 10:19:10 ERROR Failed login attempt for user 'admin' from 192.168.1.15
+2026-08-06 10:20:15 INFO Backup completed successfully
+2026-08-06 10:20:40 WARNING High memory usage detected
+2026-08-06 10:21:05 ERROR Service authentication failed
+2026-08-06 10:21:45 INFO User logged out

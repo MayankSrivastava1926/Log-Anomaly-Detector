@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Pytest
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+
+# Generated reports
+output/*.txt
+output/*.json
+
+# IDE files
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
