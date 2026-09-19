@@ -3,7 +3,7 @@ import argparse
 import sys
 import re
 
-from config import (
+from src.config import (
     FAILED_LOGIN_THRESHOLD,
     RAPID_LOGIN_THRESHOLD,
     BURST_LOGIN_THRESHOLD,
@@ -12,8 +12,8 @@ from config import (
     DISK_THRESHOLD
 )
 
-from report import save_report
-from json_report import save_json_report
+from src.report import save_report
+from src.json_report import save_json_report
 
 
 # ==================================================
