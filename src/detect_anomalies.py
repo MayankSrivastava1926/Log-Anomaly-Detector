@@ -3,18 +3,31 @@ import argparse
 import sys
 import re
 
-from src.config import (
-    FAILED_LOGIN_THRESHOLD,
-    RAPID_LOGIN_THRESHOLD,
-    BURST_LOGIN_THRESHOLD,
-    BURST_LOGIN_WINDOW,
-    CPU_THRESHOLD,
-    DISK_THRESHOLD
-)
+try:
+    from src.config import (
+        FAILED_LOGIN_THRESHOLD,
+        RAPID_LOGIN_THRESHOLD,
+        BURST_LOGIN_THRESHOLD,
+        BURST_LOGIN_WINDOW,
+        CPU_THRESHOLD,
+        DISK_THRESHOLD
+    )
 
-from src.report import save_report
-from src.json_report import save_json_report
+    from src.report import save_report
+    from src.json_report import save_json_report
 
+except ModuleNotFoundError:
+    from config import (
+        FAILED_LOGIN_THRESHOLD,
+        RAPID_LOGIN_THRESHOLD,
+        BURST_LOGIN_THRESHOLD,
+        BURST_LOGIN_WINDOW,
+        CPU_THRESHOLD,
+        DISK_THRESHOLD
+    )
+
+    from report import save_report
+    from json_report import save_json_report
 
 # ==================================================
 # HELPER FUNCTIONS
