@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime, Text
-from datetime import datetime
+from datetime import datetime, timezone
 
 from database.database import Base
 
@@ -25,6 +25,6 @@ class Scan(Base):
     alerts = Column(Text, nullable=True)
 
     created_at = Column(
-        DateTime,
-        default=datetime.utcnow
-    )
+    DateTime,
+    default=lambda: datetime.now(timezone.utc)
+)

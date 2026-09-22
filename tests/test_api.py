@@ -74,3 +74,19 @@ def test_analyze_rejects_non_log_file():
 
     assert response.status_code == 400
     assert response.json()["detail"] == "Only .log files are supported"
+
+def test_get_scans():
+    response = client.get("/scans")
+
+    assert response.status_code == 200
+
+    data = response.json()
+
+    assert isinstance(data, list)
+
+
+def test_get_scan_not_found():
+    response = client.get("/scans/9999")
+
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Scan not found"

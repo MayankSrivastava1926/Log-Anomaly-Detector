@@ -3,6 +3,7 @@ import argparse
 import sys
 import re
 
+
 try:
     from src.config import (
         FAILED_LOGIN_THRESHOLD,
@@ -28,6 +29,7 @@ except ModuleNotFoundError:
 
     from report import save_report
     from json_report import save_json_report
+
 
 # ==================================================
 # HELPER FUNCTIONS
@@ -408,6 +410,14 @@ def process_log_file(file):
 
             medium_alerts += 1
 
+    # IMPORTANT:
+    # critical_alerts is calculated later from the
+    # different detection functions.
+    # We return 0 here so the API receives a
+    # consistent 13-value structure.
+
+    critical_alerts = 0
+
     return (
         report,
         failed_logins,
@@ -417,6 +427,7 @@ def process_log_file(file):
         ip_login_times,
         total_errors,
         total_warnings,
+        critical_alerts,
         high_alerts,
         medium_alerts,
         failed_login_events,
@@ -698,6 +709,7 @@ def main():
         ip_login_times,
         total_errors,
         total_warnings,
+        critical_alerts,
         high_alerts,
         medium_alerts,
         failed_login_events,
