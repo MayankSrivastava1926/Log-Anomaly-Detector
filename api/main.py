@@ -1,4 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
+from pydantic import BaseModel
+from typing import List
 from io import StringIO
 
 from src.detect_anomalies import (
@@ -10,6 +12,24 @@ from src.detect_anomalies import (
     build_final_report
 )
 
+class Summary(BaseModel):
+    total_errors: int
+    total_warnings: int
+    critical_alerts: int
+    high_alerts: int
+    medium_alerts: int
+    failed_login_events: int
+    brute_force_incidents: int
+    authentication_failures: int
+
+
+class AnalyzeResponse(BaseModel):
+    filename: str
+    summary: Summary
+    alerts: List[str]
+    rapid_login_detection: List[str]
+    login_burst_detection: List[str]
+    report: List[str]
 
 app = FastAPI(
     title="Log Anomaly Detector API",
@@ -32,7 +52,7 @@ def health_check():
     }
 
 
-@app.post("/analyze")
+@app.post("/analyze", response_model=AnalyzeResponse)
 async def analyze_log(file: UploadFile = File(...)):
 
     if not file.filename:
@@ -164,3 +184,4 @@ async def analyze_log(file: UploadFile = File(...)):
             status_code=500,
             detail=f"Error processing log file: {error}"
         )
+

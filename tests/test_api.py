@@ -44,3 +44,33 @@ def test_analyze_log():
     assert data["summary"]["failed_login_events"] == 5
     assert data["summary"]["brute_force_incidents"] == 1
     assert data["summary"]["authentication_failures"] == 2
+
+def test_analyze_rejects_non_log_file():
+    response = client.post(
+        "/analyze",
+        files={
+            "file": (
+                "test.txt",
+                b"This is not a log file",
+                "text/plain"
+            )
+        }
+    )
+
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Only .log files are supported"
+
+def test_analyze_rejects_non_log_file():
+    response = client.post(
+        "/analyze",
+        files={
+            "file": (
+                "test.txt",
+                b"This is not a log file",
+                "text/plain"
+            )
+        }
+    )
+
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Only .log files are supported"
